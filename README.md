@@ -42,58 +42,6 @@ Cases 1, 5, 11, 14, 16, 17, 19, 22。S₁ の log log x の係数は +1/2、S₂
 
 Cases 2, 3, 4, 6, 7, 8, 9, 10, 12, 13, 15, 18, 20, 21, 23。S₁ の log log x の係数は +5/2、S₂ は +1/2。m(ρ₀) = 0 の場合と比べ、S₁ と S₂ の係数が入れ替わります。
 
-### LMFDB 全 Q8 拡大体の L 値データ
-
-LMFDB に収録されている8次 Q8 拡大体（Galois group 8T5）全50,257件について、L(1/2, ρ₀)、L'(1/2, ρ₀)、L''(1/2, ρ₀) を系統的に計算しました。
-
-| ファイル | 内容 |
-|---------|------|
-| `lmfdb_lhalf_complete.tsv` | 50,257件の L 値データ |
-
-主な結果：
-- W = +1: 24,595件、W = −1: 25,662件
-- |L(1/2)| < 10⁻⁸ の体が2件存在（index 39973, 9710）
-- 全ケースで Omar の予想 m(ρ₀) = 0 (W=+1) または 1 (W=−1) と整合
-
-## 計算手法
-
-### 高速フロベニウス分類
-
-Q8 拡大体 L は3つの二次部分体 Q(√d₁), Q(√d₂), Q(√d₃) を含みます。素数 p のフロベニウス共役類は、Kronecker 記号 (d₁/p), (d₂/p) の値で大部分が分類できます。
-
-| (d₁/p) | (d₂/p) | フロベニウス | 計算コスト |
-|---------|---------|-----------|----------|
-| +1 | −1 | {i, −i} | Kronecker のみ |
-| −1 | +1 | {j, −j} | Kronecker のみ |
-| −1 | −1 | {k, −k} | Kronecker のみ |
-| +1 | +1 | {1} or {−1} | 多項式冪剰余 |
-
-素数の約3/4は Kronecker 記号のみで分類でき、残り約1/4だけ x^p mod f(x) mod p の計算が必要です。
-
-
-### 実装
-
-- **`compute_omar_all.py`**: 全23ケースの偏り計算を一括実行。PARI/GP の `factormod` による並列計算（`compute_bias_parallel.py` を内部で使用）。
-- **`compute_omar_lvalues.py`**: PARI/GP の `lfunartin` を用いた L 値計算。
-- **`update_omar_json.py`**: L 値を JSON に反映しプロットを再生成。
-- **`plot_bias.py`**: 数値データと理論曲線（(M(σ)+m(σ)) log log x + C）の比較プロット生成。
-
-## 使い方
-
-### 依存関係
-
-- Python 3.8+（numpy, matplotlib）
-- PARI/GP 2.17+
-
-### 偏り関数の計算（Omar 23ケース）
-
-```bash
-# 全23ケースの偏り計算（Python/GP 並列版）
-python compute_omar_all.py --x-max 1e10 -w 150
-
-# プロット再生成（既存 JSON から）
-python compute_omar_all.py --plot-only
-```
 
 ## 参考文献
 
