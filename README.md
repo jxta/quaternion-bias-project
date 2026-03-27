@@ -108,10 +108,3 @@ python compute_omar_lvalues.py
 
 [3] S. Omar, "On Artin L-functions for octic quaternion fields", Experiment. Math. **10**, No. 2, 237–245 (2001).
 
-## 著者
-
-- 横山重俊（国立情報学研究所）
-
-## 謝辞
-
-本プロジェクトの計算データは、青木美穂氏（[2]の著者）の研究に使用されています。青木美穂先生、小山信也先生、黒川信重先生に感謝いたします。
