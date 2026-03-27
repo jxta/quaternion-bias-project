@@ -93,7 +93,7 @@ python compute_omar_all.py --x-max 1e10 -w 150
 
 # プロット再生成（既存 JSON から）
 python compute_omar_all.py --plot-only
-
+```
 
 ## 参考文献
 
